@@ -20,14 +20,14 @@ class LoginPage:
         def open_login(self):
                 time.sleep(3)  
                 self.driver.find_element(*self.login_btn).click()  
-                self.wait.until(EC.visibility_of_element_located(*self.login_username))
+                self.wait.until(EC.visibility_of_element_located(self.login_username))
                 time.sleep(2)  
 
-        def invalid_case(self):
+        def invalid_case(self,username,password):
                 time.sleep(2)
-                self.wait.until(EC.visibility_of_element_located(*self.login_username))
-                self.driver.find_element(*self.login_username).send_keys("tarandeep.1176@zenmonk.tech")
-                self.driver.find_element(*self.login_password).send_keys("Taran123@")
+                self.wait.until(EC.visibility_of_element_located(self.login_username))
+                self.driver.find_element(*self.login_username).send_keys(username)
+                self.driver.find_element(*self.login_password).send_keys(password)
                 self.driver.find_element(*self.submit).click()
                 time.sleep(2)
                 self.wait.until(EC.alert_is_present())
@@ -36,15 +36,15 @@ class LoginPage:
                 alert.accept()
 
         
-        def user_not_exist_case(self):
+        def user_not_exist_case(self,username,password):
                 self.driver.find_element(By.CSS_SELECTOR,"#logInModal .btn-secondary").click()
                 self.open_login()
                 time.sleep(2)
                 self.driver.find_element(*self.login_username).clear()
                 self.driver.find_element(*self.login_password).clear()
-                self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"#loginusername")))
-                self.driver.find_element(*self.login_username).send_keys("tarandeeppp.1176@zenmonk.tech")
-                self.driver.find_element(*self.login_password).send_keys("taran123@")
+                self.wait.until(EC.visibility_of_element_located(self.login_username))
+                self.driver.find_element(*self.login_username).send_keys(username)
+                self.driver.find_element(*self.login_password).send_keys(password)
                 self.driver.find_element(*self.submit).click()
                 time.sleep(2)
                 self.wait.until(EC.alert_is_present())
@@ -53,17 +53,17 @@ class LoginPage:
                 alert.accept()
 
         
-        def valid_case(self):
+        def valid_case(self,username,password):
                 self.driver.find_element(By.CSS_SELECTOR,"#logInModal .btn-secondary").click()
                 self.open_login()
                 time.sleep(1)
                 self.driver.find_element(*self.login_username).clear()
                 self.driver.find_element(*self.login_password).clear()
-                self.wait.until(EC.visibility_of_element_located((By.ID,"loginusername")))
-                self.driver.find_element(*self.login_username).send_keys("tarandeep.1176@zenmonk.tech")
-                self.driver.find_element(*self.login_password).send_keys("taran123@")
+                self.wait.until(EC.visibility_of_element_located(self.login_username))
+                self.driver.find_element(*self.login_username).send_keys(username)
+                self.driver.find_element(*self.login_password).send_keys(password)
                 self.driver.find_element(*self.submit).click()
                 time.sleep(1)
-                welcome_text = self.wait.until(EC.visibility_of_element_located(*self.welcome_text))
+                welcome_text = self.wait.until(EC.visibility_of_element_located(self.welcome_text))
                 if(welcome_text):
                         print("Login successful! - ",welcome_text.text)
