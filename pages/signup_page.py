@@ -19,12 +19,12 @@ class SignupPage:
     def open_signup(self):
         time.sleep(3)  
         self.driver.find_element(*self.signup_btn).click()  
-        self.wait.until(EC.visibility_of_element_located(*self.signup_username))
+        self.wait.until(EC.visibility_of_element_located(self.signup_username))
         time.sleep(2)  
 
     def valid_case(self,username,password):
         time.sleep(1)
-        self.wait.until(EC.visibility_of_element_located(*self.signup_username))
+        self.wait.until(EC.visibility_of_element_located(self.signup_username))
         self.driver.find_element(*self.signup_username).send_keys(username)
         self.driver.find_element(*self.signup_password).send_keys(password)
         self.driver.find_element(*self.submit_btn).click()
@@ -41,7 +41,7 @@ class SignupPage:
         self.driver.find_element(*self.signup_username).clear()
         self.driver.find_element(*self.signup_password).clear()
         time.sleep(1)
-        signup_title = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"#sign-username")))
+        signup_title = self.wait.until(EC.visibility_of_element_located(self.signup_username))
         print(signup_title)
         if(signup_title):
             self.driver.find_element(*self.signup_username).send_keys(username)
