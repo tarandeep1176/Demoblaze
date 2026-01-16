@@ -4,7 +4,7 @@ import dotenv
 dotenv.load_dotenv()
 
 class Config:
-    BASE_URL = "https://www.demoblaze.com/"
+    BASE_URL = os.getenv("BASE_URL")
     APP_USERNAME = os.getenv("APP_USERNAME")
     APP_PASSWORD = os.getenv("APP_PASSWORD")
 
