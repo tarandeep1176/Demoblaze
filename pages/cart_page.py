@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Data.place_order_data import fake
 import time
 
 class CartPage:
@@ -26,12 +27,18 @@ class CartPage:
         self.wait.until(EC.element_to_be_clickable(self.place_order_btn)).click()
         self.wait.until(EC.visibility_of_element_located(self.place_order_form))
         time.sleep(2)
-        self.driver.find_element(*self.name).send_keys("new_userrrrr")
-        self.driver.find_element(*self.country).send_keys("India")
-        self.driver.find_element(*self.city).send_keys("Delhi")
-        self.driver.find_element(*self.credit_card).send_keys("6373478837434")  
-        self.driver.find_element(*self.month).send_keys("January")
-        self.driver.find_element(*self.year).send_keys("2026")
+        self.driver.find_element(*self.name).send_keys(fake.name())
+        time.sleep(2)
+        self.driver.find_element(*self.country).send_keys(fake.country())
+        time.sleep(2)
+        self.driver.find_element(*self.city).send_keys(fake.city())
+        time.sleep(2)
+        self.driver.find_element(*self.credit_card).send_keys(fake.credit_card_number())  
+        time.sleep(2)
+        self.driver.find_element(*self.month).send_keys(fake.month_name())
+        time.sleep(2)
+        self.driver.find_element(*self.year).send_keys(fake.year())
+        time.sleep(2)
         self.driver.find_element(*self.purchase_order_btn).click()
         time.sleep(3)
         success_msg = self.wait.until(EC.visibility_of_element_located(self.order_success_msg))
