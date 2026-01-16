@@ -1,14 +1,9 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Page_Objects.Home_Page import HomePageObjects
 import time
 
-class HomePage:
-
-    cat_phone = (By.CSS_SELECTOR, "a[onClick=\"byCat('phone')\"]")
-    phone = (By.XPATH, "//a[text()='Nexus 6']")
-    add_to_cart_btn = (By.CSS_SELECTOR,".btn.btn-success.btn-lg")
-    cart_btn = (By.CSS_SELECTOR,"#cartur")
+class HomePageFunctions(HomePageObjects):
     
     def __init__(self,driver):
         self.driver = driver
