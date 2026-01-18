@@ -5,5 +5,5 @@ class LogoutPageProcess:
     def __init__(self, driver):
         self.logout = LogoutPageFunctions(driver)
 
-    def logout_user(self):
+    def run_process(self):
         self.logout.logout_user()

@@ -10,14 +10,12 @@ class LoginPageFunctions(LoginPageObjects):
                 self.driver = driver
                 self.wait = WebDriverWait(driver, 15)
 
-        def open_login(self):
-                time.sleep(3)  
-                self.driver.find_element(*self.login_btn).click()  
+        def open_login(self): 
+                self.wait.until(EC.element_to_be_clickable(self.login_btn)).click()
                 self.wait.until(EC.visibility_of_element_located(self.login_username))
                 time.sleep(2)  
 
         def enter_username(self,username):
-                self.open_login()
                 time.sleep(1)
                 self.wait.until(EC.visibility_of_element_located(self.login_username))
                 self.driver.find_element(*self.login_username).send_keys(username)

@@ -5,7 +5,7 @@ class LoginPageProcess:
     def __init__(self, driver):
         self.signup = LoginPageFunctions(driver)
 
-    def login_user(self, username, password):
+    def run_process(self, username, password):
         self.signup.open_login()
         self.signup.enter_username(username)
         self.signup.enter_password(password)

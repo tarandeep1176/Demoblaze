@@ -7,7 +7,9 @@ class LogoutPageFunctions(LogoutPageObjects):
     
     def __init__(self, driver):
         self.driver = driver
-
+        self.wait = WebDriverWait(driver, 15)
+        
     def logout_user(self):
-        self.driver.find_element(*self.logout_btn).click()
+        # self.driver.find_element(*self.logout_btn).click()
+        self.wait.until(EC.element_to_be_clickable(self.logout_btn)).click()
         print("User logged out!")

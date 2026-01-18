@@ -10,8 +10,7 @@ class SignupPageFunctions(SignupPageObjects):
         self.wait = WebDriverWait(driver, 15)
 
     def open_signup(self):
-        time.sleep(3)  
-        self.driver.find_element(*self.signup_btn).click()  
+        self.wait.until(EC.element_to_be_clickable(self.signup_btn)).click()
         self.wait.until(EC.visibility_of_element_located(self.signup_username))
         time.sleep(2)  
 
@@ -33,4 +32,5 @@ class SignupPageFunctions(SignupPageObjects):
         alert = self.driver.switch_to.alert
         print("Alert Text:", alert.text)
         alert.accept()
+        self.driver.find_element(*self.close_btn).click()
 
