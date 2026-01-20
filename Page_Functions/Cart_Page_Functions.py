@@ -11,6 +11,7 @@ class CartPageFunctions(CartPageObjects):
         self.wait = WebDriverWait(driver, 15)
 
     def place_order(self):
+        time.sleep(3)
         self.wait.until(EC.element_to_be_clickable(self.place_order_btn)).click()
         self.wait.until(EC.visibility_of_element_located(self.place_order_form))
         time.sleep(2)

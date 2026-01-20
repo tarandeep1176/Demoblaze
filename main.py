@@ -1,11 +1,5 @@
-from selenium import webdriver
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-BASE_URL = os.getenv("BASE_URL")
-APP_USERNAME = os.getenv("APP_USERNAME")
-APP_PASSWORD = os.getenv("APP_PASSWORD")
+from Libraries.Libraries import Import_libraries
+from Data.Config_Data import ConfigData
 from Page_Functions.Signup_Page_Functions import SignupPageFunctions
 from Page_Functions.Login_Page_Functions import LoginPageFunctions
 from Page_Functions.Home_Page_Functions import HomePageFunctions
@@ -19,31 +13,32 @@ from Processes.Home_Page_Processes import HomePageProcess
 from Processes.Cart_Page_Processes import CartPageProcess
 from Processes.Logout_Page_Processes import LogoutPageProcess
 
-driver = webdriver.Chrome()
-driver.maximize_window()
-driver.get(BASE_URL)
+data = ConfigData()
+driver = Import_libraries.initialize_driver()
+driver.get(data.BASE_URL)
 
-# signup_page = SignupPageFunctions(driver)
-# login_page = LoginPageFunctions(driver)
-# home_page = HomePageFunctions(driver)
-# cart_page = CartPageFunctions(driver)
-# logout_page = LogoutPageFunctions(driver)
+signup_page_functions = SignupPageFunctions(driver)
+login_page_functions = LoginPageFunctions(driver)
+home_page_functions = HomePageFunctions(driver)
+cart_page_functions = CartPageFunctions(driver)
+logout_page_functions = LogoutPageFunctions(driver)
 
 def test_signup():
-    signup = SignupPageProcess(driver)
-    signup.run_process(APP_USERNAME, APP_PASSWORD)
+    signup = SignupPageProcess(signup_page_functions)
+    signup.run_process()
 
 def test_login():
-    login = LoginPageProcess(driver)
-    login.run_process(APP_USERNAME, APP_PASSWORD)
+    login = LoginPageProcess(login_page_functions)
+    login.run_process()
+
 def test_home():
-    home = HomePageProcess(driver)
+    home = HomePageProcess(home_page_functions)
     home.run_process()
 
 def test_cart():
-    cart = CartPageProcess(driver)
+    cart = CartPageProcess(cart_page_functions)
     cart.run_process()
 
 def test_logout():
-    logout = LogoutPageProcess(driver)
+    logout = LogoutPageProcess(logout_page_functions)
     logout.run_process()
