@@ -13,8 +13,11 @@ class PhonePageFunctions(PhonePageObjects):
 
         time.sleep(3)
         self.wait.until(EC.element_to_be_clickable(self.cat_phone)).click()
+        time.sleep(2)
         self.wait.until(EC.element_to_be_clickable(self.phone)).click()
+        time.sleep(2)
         self.wait.until(EC.element_to_be_clickable(self.add_to_cart_btn)).click()
+        time.sleep(2)
         self.wait.until(EC.alert_is_present())
         self.driver.switch_to.alert.accept()
         time.sleep(2)
