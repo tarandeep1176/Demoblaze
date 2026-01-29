@@ -30,5 +30,6 @@ class LoginPageFunctions(LoginPageObjects):
 
         def verify_login(self):
                 welcome_text = self.wait.until(EC.visibility_of_element_located(self.welcome_text))
+                time.sleep(2)
                 if(welcome_text):
                         print("Login successful! - ",welcome_text.text)
