@@ -2,6 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Data.Checkout_Page_Data import CheckoutPageMother
 from Page_Objects.Checkout_Page import CheckoutPageObjects
+from config.config import take_screenshot
 import time
 import random 
 import os
@@ -33,16 +34,9 @@ class CheckoutPageFunctions(CheckoutPageObjects):
         success_msg = self.wait.until(EC.visibility_of_element_located(self.order_success_msg))
         print("Order placed successfully:", success_msg.text)
 
+        take_screenshot("checkout_confirmation_modal")
+        print("Screenshot of checkout confirmation modal taken.")
 
-    def take_screenshot(self):
-        random_no = random.randint(1, 1000)
-        Screenshot_DIR = "Screenshots"
-        os.makedirs(Screenshot_DIR, exist_ok=True)
-        filePath = f"{Screenshot_DIR}/Order_placed_{random_no}.png"
-        time.sleep(2)
-        order_confirm_box = self.driver.find_element(*self.order_confirmation_box)
-        order_confirm_box.screenshot(filePath)
-        time.sleep(2)
 
     def get_order_details(self):
         details = self.wait.until(EC.visibility_of_element_located(self.order__details))

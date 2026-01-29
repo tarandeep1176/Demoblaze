@@ -1,13 +1,25 @@
 import os
 import dotenv
+import allure
+import time
+from Libraries.Libraries import Import_libraries
 
-dotenv.load_dotenv()
 
-class Config:
-    BASE_URL = os.getenv("BASE_URL")
-    APP_USERNAME = os.getenv("APP_USERNAME")
-    APP_PASSWORD = os.getenv("APP_PASSWORD")
+SCREENSHOT_DIR = "screenshots"
 
-    print(APP_USERNAME)
-    print(APP_PASSWORD)
-    print(BASE_URL)
+def take_screenshot(name="Screenshot"):
+    os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+
+    driver = Import_libraries.get_driver()
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    file_path = f"{SCREENSHOT_DIR}/{name}_{timestamp}.png"
+
+    driver.save_screenshot(file_path)
+
+    allure.attach.file(
+        file_path,
+        name=name,
+        attachment_type=allure.attachment_type.PNG
+    )
+    return file_path
